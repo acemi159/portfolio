@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-#st.set_page_config(layout="wide")
+st.set_page_config(layout="wide")
 
 col1, col2 = st.columns(2)
 
@@ -21,14 +21,20 @@ Below you an find some of the apps I have built in Python. Feel free to contact 
 """
 st.write(content2)
 
-col3, col4 = st.columns(2)
+col3, empty_col, col4 = st.columns([1.5, 0.5, 1.5])
 
 
 data = pd.read_csv("data/data.csv", sep=";")
 with col3:
     for index, row in data[data.index % 2 == 0].iterrows():
         st.header(row["title"])
+        st.write(row["description"])
+        st.image(f"data/images/{row['image']}")
+        st.write(f"[Source Code]({row['url']})")
         
 with col4:
     for index, row in data[data.index % 2 == 1].iterrows():
         st.header(row["title"])
+        st.write(row["description"])
+        st.image(f"data/images/{row['image']}")
+        st.write(f"[Source Code]({row['url']})")
